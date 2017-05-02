@@ -4,7 +4,7 @@
 #
 Name     : time
 Version  : 1.7
-Release  : 5
+Release  : 6
 URL      : http://ftp.gnu.org/gnu/time/time-1.7.tar.gz
 Source0  : http://ftp.gnu.org/gnu/time/time-1.7.tar.gz
 Summary  : No detailed summary available
