@@ -1,0 +1,6 @@
+Configure miss: getprogname
+Configure miss: getexecname
+Configure miss: whether wint_t is too small
+Configure miss: whether stdint.h predates C++11
+Configure miss: whether __argv is declared
+Configure miss: whether C compiler handles -Werror -Wunknown-warning-option
