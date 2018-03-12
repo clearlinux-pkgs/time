@@ -1,5 +1,5 @@
 PKG_NAME := time
-URL := http://ftp.gnu.org/gnu/time/time-1.8.tar.gz
-
+URL = https://mirrors.kernel.org/gnu/time/time-1.8.tar.gz
+ARCHIVES = 
 
 include ../common/Makefile.common

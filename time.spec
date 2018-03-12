@@ -6,10 +6,10 @@
 #
 Name     : time
 Version  : 1.8
-Release  : 8
-URL      : http://ftp.gnu.org/gnu/time/time-1.8.tar.gz
-Source0  : http://ftp.gnu.org/gnu/time/time-1.8.tar.gz
-Source99 : http://ftp.gnu.org/gnu/time/time-1.8.tar.gz.sig
+Release  : 9
+URL      : https://mirrors.kernel.org/gnu/time/time-1.8.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/time/time-1.8.tar.gz
+Source99 : https://mirrors.kernel.org/gnu/time/time-1.8.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
@@ -49,13 +49,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1510235499
+export SOURCE_DATE_EPOCH=1520828861
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 %reconfigure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -65,7 +65,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1510235499
+export SOURCE_DATE_EPOCH=1520828861
 rm -rf %{buildroot}
 %make_install
 
