@@ -1,3 +1,19 @@
+* Noteworthy changes in release 1.9 (2018-03-12) [stable]
+
+** Improvements
+
+  time now reports percent CPU usage for programs lasting less then 1 second.
+  previously, time would report '??%' if programs lasted less than 1 second.
+  (adopted from Fedora).
+
+** Changes in behaviour
+
+  "time -p" no longers adds the "Command exited with non-zero status" message.
+  This is a backward-incompatible change for better POSIX compliance.
+  Many downstream distributions previously patched 'time' to behave this way
+  (Debian added '-q', Fedora patched '-p').
+
+
 * Noteworthy changes in release 1.8 (2017-11-07) [stable]
 
 ** Licensing
