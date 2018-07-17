@@ -6,7 +6,7 @@
 #
 Name     : time
 Version  : 1.9
-Release  : 11
+Release  : 12
 URL      : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
 Source99 : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz.sig
@@ -14,8 +14,7 @@ Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: time-bin
-Requires: time-doc
-BuildRequires : texinfo
+Requires: time-license
 
 %description
 `time' is a program that measures many of the CPU resources, such as
@@ -28,6 +27,7 @@ unavailable information as zero values.
 %package bin
 Summary: bin components for the time package.
 Group: Binaries
+Requires: time-license
 
 %description bin
 bin components for the time package.
@@ -41,6 +41,14 @@ Group: Documentation
 doc components for the time package.
 
 
+%package license
+Summary: license components for the time package.
+Group: Default
+
+%description license
+license components for the time package.
+
+
 %prep
 %setup -q -n time-1.9
 
@@ -49,12 +57,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1522110298
+export SOURCE_DATE_EPOCH=1531850947
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-%reconfigure --disable-static
+%configure --disable-static
 make  %{?_smp_mflags}
 
 %check
@@ -65,8 +73,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1522110298
+export SOURCE_DATE_EPOCH=1531850947
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/time
+cp COPYING %{buildroot}/usr/share/doc/time/COPYING
 %make_install
 
 %files
@@ -77,5 +87,9 @@ rm -rf %{buildroot}
 /usr/bin/time
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/info/*
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/time/COPYING
