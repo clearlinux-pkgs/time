@@ -6,7 +6,7 @@
 #
 Name     : time
 Version  : 1.9
-Release  : 12
+Release  : 13
 URL      : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
 Source99 : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz.sig
