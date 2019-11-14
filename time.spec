@@ -6,15 +6,16 @@
 #
 Name     : time
 Version  : 1.9
-Release  : 13
+Release  : 14
 URL      : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
-Source99 : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz.sig
+Source1 : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: time-bin
-Requires: time-license
+Requires: time-bin = %{version}-%{release}
+Requires: time-info = %{version}-%{release}
+Requires: time-license = %{version}-%{release}
 
 %description
 `time' is a program that measures many of the CPU resources, such as
@@ -27,18 +28,18 @@ unavailable information as zero values.
 %package bin
 Summary: bin components for the time package.
 Group: Binaries
-Requires: time-license
+Requires: time-license = %{version}-%{release}
 
 %description bin
 bin components for the time package.
 
 
-%package doc
-Summary: doc components for the time package.
-Group: Documentation
+%package info
+Summary: info components for the time package.
+Group: Default
 
-%description doc
-doc components for the time package.
+%description info
+info components for the time package.
 
 
 %package license
@@ -51,32 +52,37 @@ license components for the time package.
 
 %prep
 %setup -q -n time-1.9
+cd %{_builddir}/time-1.9
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1531850947
-export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1573774455
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1531850947
+export SOURCE_DATE_EPOCH=1573774455
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/time
-cp COPYING %{buildroot}/usr/share/doc/time/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/time
+cp %{_builddir}/time-1.9/COPYING %{buildroot}/usr/share/package-licenses/time/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install
 
 %files
@@ -86,10 +92,10 @@ cp COPYING %{buildroot}/usr/share/doc/time/COPYING
 %defattr(-,root,root,-)
 /usr/bin/time
 
-%files doc
+%files info
 %defattr(0644,root,root,0755)
-%doc /usr/share/info/*
+/usr/share/info/time.info
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/time/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/time/8624bcdae55baeef00cd11d5dfcfa60f68710a02
