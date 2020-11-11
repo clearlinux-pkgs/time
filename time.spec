@@ -6,10 +6,10 @@
 #
 Name     : time
 Version  : 1.9
-Release  : 14
+Release  : 15
 URL      : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz
-Source1 : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz.sig
+Source1  : https://mirrors.kernel.org/gnu/time/time-1.9.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
@@ -59,14 +59,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573774455
+export SOURCE_DATE_EPOCH=1605136641
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -76,10 +76,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1573774455
+export SOURCE_DATE_EPOCH=1605136641
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/time
 cp %{_builddir}/time-1.9/COPYING %{buildroot}/usr/share/package-licenses/time/8624bcdae55baeef00cd11d5dfcfa60f68710a02
